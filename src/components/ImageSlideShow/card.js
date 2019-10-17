@@ -1,11 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useSpring, animated, to } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
 import clamp from 'lodash.clamp'
 import './styles.css'
 import * as R from 'ramda'
-
-// const boundaries = [-50, 250, 50, -250];
 
 document.addEventListener('gesturestart', e => e.preventDefault())
 document.addEventListener('gesturechange', e => e.preventDefault())
@@ -44,12 +42,12 @@ export default function Card({ img, initialDims }) {
         return memo
       },
       onPinch: ({ offset: [d, a] }) => {
-        const newZoom = Math.min(d / 100, .5);
-        if(newZoom < 0) {
-          set({ zoom: 0, x: 0, y: 0 })
-        } else {
-          set({zoom: newZoom})
+        const newZoom = {zoom: clamp(d / 100, 0, .5)};
+        if(newZoom.zoom <= 0) {
+          newZoom.x = 0;
+          newZoom.y = 0;
         }
+        set(newZoom)
       }
     },
     { domTarget, event: { passive: false } }
