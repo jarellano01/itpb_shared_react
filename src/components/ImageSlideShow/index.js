@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from "./card";
 import { animated } from 'react-spring'
+import useWindowSize from "../../hooks/useWindowSize";
 
 const pages = [
   'https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -10,9 +11,8 @@ const pages = [
   'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
 ];
 const Index = () => {
-
-  const initialWidth = 500;
-  const initialHeight = 400;
+  const {height: initialHeight, width: initialWidth} = useWindowSize();
+  console.log(initialHeight, initialWidth)
   return (
     <div id='root'>
         <animated.div className="animated-container">

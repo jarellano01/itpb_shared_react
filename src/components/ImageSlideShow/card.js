@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useSpring, animated, to } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
 import clamp from 'lodash.clamp'
@@ -26,8 +26,10 @@ export default function Card({ img, initialDims }) {
     zoom: 0,
     scale: 1,
     immediate: true,
-    ...initialDims,
   }));
+  useEffect(() => {
+    set(initialDims)
+  }, );
   const bind = useGesture(
     {
       onDrag: ({ movement, memo = [x.getValue(), y.getValue(), scale.getValue() + zoom.getValue()] }) => {
@@ -64,8 +66,7 @@ export default function Card({ img, initialDims }) {
         x,
         y,
         scale: to([scale, zoom], (s, z) => s + z),
-        width,
-        height
+        ...initialDims,
       }}>
     </animated.img>
   )
