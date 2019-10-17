@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useSpring, animated, to } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
 import clamp from 'lodash.clamp'
 import './styles.css'
-import * as R from 'ramda'
 
 document.addEventListener('gesturestart', e => e.preventDefault())
 document.addEventListener('gesturechange', e => e.preventDefault())
@@ -20,16 +19,13 @@ const preventDragHandler = e => e.preventDefault();
 export default function Card({ img, initialDims }) {
   const domTarget = React.useRef(null);
 
-  const [{ x, y, zoom, scale, width, height }, set] = useSpring(() => ({
+  const [{ x, y, zoom, scale }, set] = useSpring(() => ({
     x: 0,
     y: 0,
     zoom: 0,
     scale: 1,
     immediate: true,
   }));
-  useEffect(() => {
-    set(initialDims)
-  }, );
   const bind = useGesture(
     {
       onDrag: ({ movement, memo = [x.getValue(), y.getValue(), scale.getValue() + zoom.getValue()] }) => {
