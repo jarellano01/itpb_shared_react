@@ -1,32 +1,61 @@
-import React from 'react'
-import Card from "./card";
-import { animated } from 'react-spring'
+import React, {useEffect, useRef} from 'react'
 import useWindowSize from "../../hooks/useWindowSize";
+import PinchZoomPan from "../PinchZoomPan";
+import Slider from "react-slick";
+import classNames from 'classnames';
+import {createUseStyles} from 'react-jss';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const pages = [
-  'https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/1509428/pexels-photo-1509428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/351265/pexels-photo-351265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-];
-const Index = () => {
+
+const useStyles = createUseStyles({
+  main: {
+    visibility: 'hidden',
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0,
+    transition: 'opacity 0.3s linear'
+  },
+  isOpen: {
+    visibility: 'visible',
+    opacity: 1
+  },
+  close: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+  },
+});
+
+const ImageSlideShow = ({isOpen, close, imageIndex=0, images}) => {
+  const classes = useStyles();
   const {height: initialHeight, width: initialWidth} = useWindowSize();
-  console.log(initialHeight, initialWidth)
+  const sliderRef = useRef();
+  useEffect(() => {
+    sliderRef.current.slickGoTo(imageIndex, true)
+  }, [imageIndex]);
   return (
-    <div id='root'>
-        <animated.div className="animated-container">
-          <animated.div className="carousel-container">
-            <animated.div className="carousel-content" style={{width: initialWidth, height: initialHeight}}>
-              <Card
-                img={pages[1]}
+    <div
+      className={classNames(classes.main, isOpen && classes.isOpen)}
+    >
+      <Slider ref={sliderRef}>
+          {
+            images.map((page) => {
+              return <PinchZoomPan
+                img={page}
+                key={page}
                 initialDims={{width: initialWidth, height: initialHeight}}
               />
-            </animated.div>
-          </animated.div>
-        </animated.div>
+            })
+          }
+      </Slider>
+
+      <button className={classes.close} onClick={close}>X</button>
     </div>
   )
 };
 
-export default Index;
+export default ImageSlideShow;

@@ -1,7 +1,7 @@
-import React from 'react';
-import PinchZoomPanExample from '../components/PinchZoomPan/sample'
-import ImageSlideShow from '../components/ImageSlideShow'
-import ImageGridSlideShow from "../components/ImageGridSlideShow";
+import React from 'react'
+import Card from "./index";
+import { animated } from 'react-spring'
+import useWindowSize from "../../hooks/useWindowSize";
 
 const pages = [
   'https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -10,23 +10,17 @@ const pages = [
   'https://images.pexels.com/photos/351265/pexels-photo-351265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
   'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
 ];
-
-export default {
-  title: 'ImageSlideShow',
-};
-
-export const PinchZoomPan = () => {
+const Index = () => {
+  const {height: initialHeight, width: initialWidth} = useWindowSize();
+  console.log(initialHeight, initialWidth)
   return (
-    <PinchZoomPanExample img={pages[1]} initialDims={{height: 500, width: 500}}/>
+    <div id='root'>
+      <Card
+        img={pages[1]}
+        initialDims={{width: initialWidth, height: initialHeight}}
+      />
+    </div>
   )
 };
-export const slideShow = () => {
-  return (
-    <ImageSlideShow images={pages} isOpen={true}/>
-  )
-};
-export const clickSlideShow = () => {
-  return(
-    <ImageGridSlideShow images={pages} />
-  )
-}
+
+export default Index;

@@ -2,6 +2,7 @@ import React from 'react'
 import { useSpring, animated, to } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
 import clamp from 'lodash.clamp'
+import './styles.css'
 
 document.addEventListener('gesturestart', e => e.preventDefault())
 document.addEventListener('gesturechange', e => e.preventDefault())
@@ -15,7 +16,7 @@ const getOffsets = (zoom, {width, height}) => {
 };
 const preventDragHandler = e => e.preventDefault();
 
-export default function Card({ img, initialDims }) {
+export default function PinchZoomPan({ img, initialDims }) {
   const domTarget = React.useRef(null);
 
   const [{ x, y, zoom, scale }, set] = useSpring(() => ({
@@ -38,8 +39,7 @@ export default function Card({ img, initialDims }) {
         });
         return memo
       },
-      onPinch: ({ offset: [d, a], ...props}) => {
-        console.log(props.active)
+      onPinch: ({ offset: [d, a]}) => {
         const newZoom = {zoom: clamp(d / 100, 0, .5)};
         if(newZoom.zoom <= 0) {
           newZoom.x = 0;
@@ -52,18 +52,20 @@ export default function Card({ img, initialDims }) {
   );
   React.useEffect(bind, [bind]);
   return (
-    <animated.img
-      ref={domTarget}
-      className="img-wrapper"
-      src={img}
-      alt="test"
-      onDragStart={preventDragHandler}
-      style={{
-        x,
-        y,
-        scale: to([scale, zoom], (s, z) => s + z),
-        ...initialDims,
-      }}>
-    </animated.img>
+    <animated.div className="carousel-content" style={initialDims}>
+      <animated.img
+        ref={domTarget}
+        className="img-wrapper"
+        src={img}
+        alt="test"
+        onDragStart={preventDragHandler}
+        style={{
+          x,
+          y,
+          scale: to([scale, zoom], (s, z) => s + z),
+          ...initialDims,
+        }}>
+      </animated.img>
+    </animated.div>
   )
 }
