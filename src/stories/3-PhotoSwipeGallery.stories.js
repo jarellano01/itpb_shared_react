@@ -50,6 +50,7 @@ export default {
 };
 
 export const PhotoSwipeGalleryDemo = () => {
+  console.log(items)
   return (
     <PhotoSwipeGallery items={items} />
   )

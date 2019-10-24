@@ -18,6 +18,7 @@ export default {
   title: 'PhotoSwipeGallery'
 };
 export const PhotoSwipeGalleryDemo = () => {
+  console.log(items);
   return React.createElement(PhotoSwipeGallery, {
     items: items
   });
