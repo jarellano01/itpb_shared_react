@@ -12,6 +12,7 @@ const useStyles = createUseStyles({
   main: {
     visibility: 'hidden',
     position: "fixed",
+    alignItems: 'center',
     top: 0,
     left: 0,
     width: '100%',
@@ -28,6 +29,9 @@ const useStyles = createUseStyles({
     right: 10,
     top: 10,
   },
+  slider: {
+    height: '100vh'
+  }
 });
 
 const ImageSlideShow = ({isOpen, close, imageIndex=0, images}) => {
@@ -41,7 +45,7 @@ const ImageSlideShow = ({isOpen, close, imageIndex=0, images}) => {
     <div
       className={classNames(classes.main, isOpen && classes.isOpen)}
     >
-      <Slider ref={sliderRef}>
+      <Slider ref={sliderRef} className={classes.slider}>
           {
             images.map((page) => {
               return <PinchZoomPan

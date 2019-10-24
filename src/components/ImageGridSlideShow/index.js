@@ -1,10 +1,9 @@
-import React, {useState, useCallback} from 'react'
-import useWindowSize from "../../hooks/useWindowSize";
-import PinchZoomPan from "../PinchZoomPan";
-import Slider from "react-slick";
+import React, {useState} from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick-theme.css";
 import ImageSlideShow from "../ImageSlideShow";
+import {createUseStyles} from "react-jss";
 
 const pages = [
   'https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -13,12 +12,17 @@ const pages = [
   'https://images.pexels.com/photos/351265/pexels-photo-351265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
   'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
 ];
-const ImageGridSlideShow = ({images}) => {
-  const style = {
+
+const useStyles = createUseStyles({
+  imageGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
     gap: '20px'
-  };
+  },
+});
+
+const ImageGridSlideShow = ({images}) => {
+  const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
   const close = () => setIsOpen(false);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -28,7 +32,7 @@ const ImageGridSlideShow = ({images}) => {
   };
   return (
     <div>
-      <div style={style}>
+      <div className={classes.imageGrid}>
         {
           images.map((page, i) => {
             return (
