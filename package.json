@@ -37,6 +37,10 @@
       "last 1 safari version"
     ]
   },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.1 || ^16.0.0",
+    "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/preset-react": "^7.6.3",
