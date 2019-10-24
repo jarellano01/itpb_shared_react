@@ -1,1 +1,1 @@
-export * from './components/PhotoSwipeGallery'
+export PhotoSwipeGallery from './components/PhotoSwipeGallery'
