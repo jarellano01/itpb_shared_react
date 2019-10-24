@@ -1,1 +1,2 @@
-export PhotoSwipeGallery from './components/PhotoSwipeGallery'
+import PhotoSwipeGallery from './components/PhotoSwipeGallery'
+export {PhotoSwipeGallery}

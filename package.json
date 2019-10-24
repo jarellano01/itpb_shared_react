@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "license": "(ISC OR GPL-3.0)",
-  "main": "dist/components",
-  "module": "dist/components",
+  "main": "dist/index.js",
   "babel": {
     "presets": [
       "@babel/react"
@@ -19,7 +18,7 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "build": "rm -rf dist && mkdir dist && npx babel src/components -d dist --copy-files",
+    "build": "rm -rf dist && mkdir dist && npx babel src -d dist --copy-files",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -42,13 +41,15 @@
     ]
   },
   "devDependencies": {
-    "lodash.clamp": "^4.0.3",
-    "pure-react-carousel": "^1.23.0",
-    "ramda": "^0.26.1",
+    "@babel/cli": "^7.6.4",
+    "@babel/preset-react": "^7.6.3",
     "@storybook/addon-actions": "^5.2.4",
     "@storybook/addon-links": "^5.2.4",
     "@storybook/addons": "^5.2.4",
     "@storybook/react": "^5.2.4",
+    "lodash.clamp": "^4.0.3",
+    "pure-react-carousel": "^1.23.0",
+    "ramda": "^0.26.1",
     "react-slick": "^0.25.2",
     "react-spring": "9.0.0-beta.34",
     "react-use-gesture": "latest",
