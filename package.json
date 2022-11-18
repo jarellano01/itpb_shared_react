@@ -47,7 +47,7 @@
     "@storybook/addon-actions": "^5.2.4",
     "@storybook/addon-links": "^5.2.4",
     "@storybook/addons": "^5.2.4",
-    "@storybook/react": "^5.2.4",
+    "@storybook/react": "^6.5.13",
     "lodash.clamp": "^4.0.3",
     "pure-react-carousel": "^1.23.0",
     "ramda": "^0.26.1",
@@ -57,6 +57,6 @@
     "slick-carousel": "^1.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.2.0"
+    "react-scripts": "5.0.1"
   }
 }
